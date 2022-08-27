@@ -1,15 +1,11 @@
 const express = require('express');
+const index = require('./routes/index')
 
 class Http {
 	constructor() {
 		this.express = express();
-		this.mountRoutes();
-	}
-
-	mountRoutes() {
-		this.express.get('/', (req, res) => {
-			res.send('this is bulter of my house!');
-		})
+		this.express.set('view engine', 'ejs');
+		this.express.use('/', index);
 	}
 
 	getApp() {
