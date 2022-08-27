@@ -8,14 +8,14 @@ class Http {
 
 	mountRoutes() {
 		this.express.get('/', (req, res) => {
-			res.send('this is bulter of my home!');
+			res.send('this is bulter of my house!');
 		})
 	}
 
 	getApp() {
 		return this.express;
 	}
-	
+
 }
 
 module.exports = Http;
