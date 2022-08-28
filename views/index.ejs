@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>index.ejs</title>
-</head>
-<body>
-	<%- include('layouts/header.ejs') %>
-	<h1>This is a butler of my house!</h1>
-</body>
+<html lang="en">
+  <head>
+    <%- include('layouts/header.ejs') %>
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+      <%- include('layouts/navigation.ejs') %>
+      <%- include('layouts/sidebar.ejs') %>
+      <%- include('layouts/content-wrapper.ejs') %>
+      <%- include('layouts/footer.ejs') %>
+      <%- include('layouts/control-sidebar.ejs') %>
+    </div>
+    <!-- ./wrapper -->
+    <%- include('layouts/js.ejs') %>
+  </body>
 </html>
