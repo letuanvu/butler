@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "PORT=3000 node server.js"
+    "dev": "PORT=3000 node server.js",
+    "watch:dev": "nodemon 'server.js' --watch './'"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,13 @@
   "homepage": "https://github.com/letuanvu/butler#readme",
   "dependencies": {
     "admin-lte": "^2.4.10",
+    "body-parser": "^1.20.0",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "http-errors": "^2.0.0",
     "md5": "^2.3.0",
     "mongoose": "^6.5.3"

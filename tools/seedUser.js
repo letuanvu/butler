@@ -7,7 +7,7 @@ const seed = async () => {
     Http.connectMongo(); 
 
     const admin = new userSchema();
-    admin.email = 'letuanvu';
+    admin.email = 'ltvu.59@gmail.com';
     admin.password = md5('123456');
     console.log(await admin.save());
 
