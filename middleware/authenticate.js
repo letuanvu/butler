@@ -1,7 +1,6 @@
 const User = require('../models/userSchema');
 
 const authenticate = (req, res, next) => {
-    console.log(req.session.user);
     if (!req.session.user) {
         req.flash('error', 'Not authorized! Go back!');
         return res.redirect('/login');
