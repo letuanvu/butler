@@ -7,30 +7,33 @@ const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 
-/* routes include */
-const indexPage = require('./routes/indexPage');
-const loginPage = require('./routes/loginPage');
-
 class Http {
     constructor() {
         this.app = express();
         this.setup();
-        this.moutRoutes();
-        Http.connectMongo();
+        Http.connectMongo().then(() => {
+            this.moutRoutes();
+        });
     }
 
-    static connectMongo() {
+    static async connectMongo() {
         try {
-            mongoose.connect(process.env.MONGO_URI);
-            console.log("Connected to Mongodb")
+            await mongoose.connect(process.env.MONGO_URI);
+            mongoose.Promise = global.Promise;
+            mongoose.connection.on("error", error => {
+                console.log('Problem connection to the database'+error);
+            });
         } catch (connectError) {
             console.error(connectError);
         }
     }
 
     moutRoutes() {
-        this.app.use(indexPage);
-        this.app.use(loginPage);
+        this.app.use(require('./routes/indexPage'));
+        this.app.use(require('./routes/loginPage'));
+        this.app.use(require('./routes/cameraPage'));
+        this.app.use(require('./routes/cameraAPI'));
+
         this.app.use(function (req, res, next) {
             next(createError(404));
         });

@@ -1,6 +1,7 @@
 const userSchema = require('../models/userSchema');
 const Http = require('../Http');
 const md5 = require('md5');
+require('dotenv').config();
 
 const seed = async () => {
   try {
