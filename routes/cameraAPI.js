@@ -5,12 +5,14 @@ const mongoose = require('mongoose');
 const upload = require('../uploads/cameraImageUpload');
 const CameraImageMetadata = require('../models/camera_imagesSchema');
 const _ = require('lodash');
+const ApiAuthenticate = require('../middleware/ApiAuthenticate');
+const authenticate = require('../middleware/authenticate');
 
-router.post('/camera/upload', upload.single('image'), (req, res) => {
+router.post('/camera/upload', [ApiAuthenticate, upload.single('image')], (req, res) => {
     res.send('ok');
 });
 
-router.get('/camera/:id', async (req, res) => {
+router.get('/camera/show/:id', authenticate, async (req, res) => {
     try {
         const fileInfo = await CameraImageMetadata.findById(req.params.id);
         if (!!fileInfo) {
@@ -28,15 +30,15 @@ router.get('/camera/:id', async (req, res) => {
     }
 })
 
-router.get('/camera/list', async (req, res) => {
-    CameraImageMetadata.find({}, function(err, users) {
+router.get('/camera/list', authenticate, async (req, res) => {
+    CameraImageMetadata.find({}, (err, rows) => {
         let images = {};
-
-        users.forEach(function(image) {
+        console.log(rows)
+        rows.forEach(function(image) {
             images[image._id] = image;
         });
 
-        res.send(images);
+        res.status(200).send(images);
     })
 })
 
