@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const seed = async () => {
   try {
-    Http.connectMongo(); 
+    await Http.connectMongo();
 
     const admin = new userSchema();
     admin.email = 'ltvu.59@gmail.com';
